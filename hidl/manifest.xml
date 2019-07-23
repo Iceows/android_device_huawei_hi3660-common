@@ -248,15 +248,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.wifi</name>
-        <transport>hwbinder</transport>
-        <version>1.2</version>
-        <interface>
-            <name>IWifi</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.wifi.hostapd</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -484,15 +475,6 @@
             <name>IRadioIms</name>
             <instance>rildi</instance>
             <instance>rildi2</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.huawei.hardware.wifi</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IHwWifiExt</name>
-            <instance>default</instance>
         </interface>
     </hal>
 </manifest>
