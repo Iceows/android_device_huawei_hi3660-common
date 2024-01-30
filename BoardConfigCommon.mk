@@ -83,6 +83,9 @@ TARGET_COPY_OUT_VENDOR := vendor
 # Platform
 TARGET_BOARD_PLATFORM := hi3660
 
+# Properties
+TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
+
 # Recovery
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.hi3660
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
@@ -101,6 +104,7 @@ BOARD_ROOT_EXTRA_FOLDERS += \
 
 # SEPolicy
 include device/hisi/sepolicy/SEPolicy.mk
+BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
 
 # Treble
 PRODUCT_FULL_TREBLE_OVERRIDE := true
