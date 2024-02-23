@@ -118,6 +118,11 @@ PRODUCT_COPY_FILES += \
     system/core/libprocessgroup/profiles/cgroups_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
     system/core/libprocessgroup/profiles/task_profiles_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
+# Tee
+PRODUCT_PACKAGES += \
+    vendor.huawei.hardware.libteec@2.0 \
+    vendor.huawei.hardware.libteec@2.0.vendor
+
 # VNDK
 PRODUCT_PACKAGES += \
     libui-v28
