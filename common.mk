@@ -178,6 +178,15 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PACKAGES += \
     ueventd.hi3660.rc
 
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service
+
+PRODUCT_PACKAGES += \
+    android.frameworks.sensorservice@1.0.vendor \
+    vendor.huawei.hardware.sensors@1.0.vendor
+
 # Task profiles
 PRODUCT_COPY_FILES += \
     system/core/libprocessgroup/profiles/cgroups_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \

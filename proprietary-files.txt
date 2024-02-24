@@ -257,6 +257,10 @@ vendor/etc/perfgenius_scenario_policy.xml
 vendor/etc/xml/iaware_config_cust.xml
 vendor/etc/xml/uniperf_config_cust.xml
 
+# Sensors
+vendor/lib/hw/sensors.default.so:vendor/lib/hw/sensors.hi3660.so
+vendor/lib64/hw/sensors.default.so:vendor/lib64/hw/sensors.hi3660.so
+
 # TEE (system)
 system/bin/tee_auth_daemon
 system/etc/native_packages.xml:system/etc/native_packages.bin
