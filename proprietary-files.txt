@@ -22,6 +22,11 @@ vendor/etc/init/vendor.huawei.hardware.biometrics.fingerprint@2.1-service.rc
 vendor/lib/hw/fingerprint.hi3660.so
 vendor/lib64/hw/fingerprint.hi3660.so
 
+# Bluetooth
+vendor/etc/bluetooth/bt_vendor.conf
+vendor/lib64/libbt-vendor-hisi.so
+vendor/lib64/libbt-vendor.so
+
 # Display
 vendor/lib/libgpucommon_vendor_client.so
 vendor/lib/libgralloc_ext.so
