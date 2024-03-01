@@ -82,7 +82,8 @@ PRODUCT_COPY_FILES += \
 
 # Biometrics
 PRODUCT_PACKAGES += \
-    vendor.huawei.hardware.biometrics.fingerprint@2.1.vendor
+    vendor.huawei.hardware.biometrics.fingerprint@2.1.vendor \
+    vendor.huawei.hardware.biometrics.hwfacerecognize@1.1.vendor
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -91,6 +92,18 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libbt-vendor
+
+# Camera
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl
+
+PRODUCT_PACKAGES += \
+    vendor.huawei.hardware.camera.cfgsvr@1.1.vendor \
+    vendor.huawei.hardware.hwfactoryinterface@1.1.vendor
+
+PRODUCT_PACKAGES += \
+    libstdc++.vendor \
+    libui_shim.vendor
 
 # Connectivity
 PRODUCT_COPY_FILES += \
