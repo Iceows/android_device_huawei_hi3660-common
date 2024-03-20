@@ -862,3 +862,12 @@ service CameraDaemon /vendor/bin/CameraDaemon hi3660 ${ro.vendor.camera.platform
     ioprio rt 4
     capabilities SYS_NICE
     writepid /dev/cpuset/top-app/tasks /dev/stune/top-app/tasks
+
+service vendor.hwcomposer-2-2 /vendor/bin/hw/android.hardware.graphics.composer@2.2-service
+    override
+    class hal animation
+    user system
+    group graphics drmrpc
+    capabilities SYS_NICE
+    onrestart restart surfaceflinger
+    task_profiles HighPerformance
