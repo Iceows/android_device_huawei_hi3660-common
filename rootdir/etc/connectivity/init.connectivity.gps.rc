@@ -82,11 +82,6 @@ service ipld /product/bin/inv_ipld  /data/vendor/gps/inv_ipld.prop
     group system sdcard_rw
     disabled
 
-service fusd /vendor/bin/fusion_daemon
-    class late_start
-    user system
-    group system root wakelock
-
 service vendor.lhd_4774  /vendor/bin/lhd4774  /data/vendor/gps/lhd.conf
     class late_start
     user gps

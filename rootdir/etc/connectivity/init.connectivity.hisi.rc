@@ -95,11 +95,6 @@ service watchlssd /vendor/bin/gnss_watchlssd_thirdparty
     group system inet net_raw wakelock
     disabled
 
-service fusd /vendor/bin/fusion_daemon
-    class late_start
-    user system
-    group system root wakelock
-
 service gpsdaemon /vendor/bin/gpsdaemon
     class main
     user root
