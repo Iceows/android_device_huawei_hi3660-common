@@ -109,9 +109,6 @@
     -->
 
     <preprocess>
-        <stream type="default">
-            <apply effect="huawei_pre_processing"/>
-        </stream>
         <stream type="mic">
             <apply effect="huawei_pre_processing"/>
         </stream>
