@@ -249,6 +249,11 @@ PRODUCT_PACKAGES += \
     vendor.huawei.hardware.libteec@2.0 \
     vendor.huawei.hardware.libteec@2.0.vendor
 
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service
+
 PRODUCT_PACKAGES += \
     vendor.huawei.hardware.hwvibrator@1.0.vendor
 
