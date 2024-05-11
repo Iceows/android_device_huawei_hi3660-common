@@ -33,7 +33,6 @@ on early-boot
 
     # create Ext SDcard mountpoint
     mkdir /mnt/media_rw 0750 media_rw media_rw
-    mkdir /mnt/hisee_fs 0760 root system
 
     #irda
     chown system system /sys/class/irda/irda_maxim/power_cfg
