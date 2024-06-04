@@ -36,6 +36,8 @@ BOARD_USES_LIBBT_WRAPPER := true
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+
 
 # HIDL
 DEVICE_MATRIX_FILE += $(COMMON_PATH)/hidl/compatibility_matrix.xml

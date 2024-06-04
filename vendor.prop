@@ -45,6 +45,11 @@ ro.fastbootd.available=true
 # IMS
 ro.config.hw_volte_on=true
 
+# Crypto
+ro.crypto.volume.contents_mode=aes-256-xts
+ro.crypto.volume.filenames_mode=aes-256-cts
+
+
 # RIL
 ro.telephony.default_network=9,9
 persist.radio.dualltecap=1

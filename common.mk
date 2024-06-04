@@ -215,7 +215,6 @@ PRODUCT_PACKAGES += \
     init.hisi.rc \
     init.hisi.usb.rc \
     init.platform.rc \
-    init.tee.rc \
     init.vowifi.rc
 
 # Keymaster
