@@ -72,7 +72,7 @@ BOARD_CUSTOM_BOOTIMG_HAS_RAMDISK := false
 BOARD_CUSTOM_BOOTIMG_MK := hardware/huawei/mkbootimg.mk
 
 TARGET_KERNEL_SOURCE := kernel/huawei/hi3660
-TARGET_KERNEL_CONFIG := merge_hi3660_defconfig
+TARGET_KERNEL_CONFIG := hisi3660_defconfig modem.config
 TARGET_KERNEL_CLANG_VERSION := r416183b
 TARGET_KERNEL_CLANG_PATH := $(abspath .)/prebuilts/clang/kernel/$(HOST_PREBUILT_TAG)/clang-$(TARGET_KERNEL_CLANG_VERSION)
 TARGET_KERNEL_LLVM_BINUTILS := false
