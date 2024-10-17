@@ -763,6 +763,9 @@ on boot
     write /sys/kernel/rcc/max_anon_clean_size 512M
     write /sys/kernel/rcc/enable 1
 
+    # Power
+    setprop vendor.powerhal.init 1
+
 on property:sys.boot_completed=1
     write /sys/kernel/rcc/event BOOT_COMPLETE
 

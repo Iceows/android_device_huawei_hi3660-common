@@ -62,22 +62,25 @@ PRODUCT_COPY_FILES += \
 # Audio
 $(call soong_config_set,huaweiAudioVars,emui_version,9)
 
+# Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio@4.0-impl \
+    android.hardware.audio@4.0-impl-hisi \
     android.hardware.audio.effect@4.0-impl \
     android.hardware.audio.service.hisi \
     android.hardware.bluetooth.audio@2.1-impl
 
 PRODUCT_PACKAGES += \
+    audio.primary.hi3660 \
     audio.bluetooth.default \
-    audio.primary.hisi_wrapper \
     audio.r_submix.default \
     audio.usb.default
 
 PRODUCT_PACKAGES += \
-    libalsautils \
     libaudiopreprocessing \
-    libtinycompress
+    libtinycompress \
+    libaudioroute \
+    libtinyalsa \
+    libalsautils
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
@@ -101,10 +104,9 @@ PRODUCT_PACKAGES += \
     libhwbinder.vendor \
     libhwbinder
 
-# Biometrics
+# Fingerprint
 PRODUCT_PACKAGES += \
-    vendor.huawei.hardware.biometrics.fingerprint@2.1.vendor \
-    vendor.huawei.hardware.biometrics.hwfacerecognize@1.1.vendor
+    vendor.huawei.hardware.biometrics.fingerprint@2.1.vendor
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -117,10 +119,6 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl
-
-PRODUCT_PACKAGES += \
-    vendor.huawei.hardware.camera.cfgsvr@1.1.vendor \
-    vendor.huawei.hardware.hwfactoryinterface@1.1.vendor
 
 PRODUCT_PACKAGES += \
     libstdc++.vendor \
@@ -197,8 +195,9 @@ PRODUCT_PACKAGES += \
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health-service.hisi \
-    android.hardware.health-service.hisi-recovery
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-impl.recovery \
+    android.hardware.health@2.1-service
 
 # HIDL
 PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
@@ -237,25 +236,14 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light-service.huawei
-
-# Livedisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.1-service.hisi
+    android.hardware.light-service.hisi
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service.huawei-libperfmgr
-
-PRODUCT_PACKAGES += \
-    vendor.huawei.hardware.perfgenius@2.0.vendor
-
-PRODUCT_PACKAGES += \
-    libiawareperf_client \
-    libperfgenius_vendor_client
+    android.hardware.power-service.hisi
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
@@ -278,9 +266,10 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/google/interfaces \
     hardware/google/pixel \
-    hardware/hisi \
     hardware/huawei \
-    hardware/huawei/power-libperfmgr
+    hardware/hisi \
+    hardware/hisi_fm \
+    hardware/huawei/power
 
 # Ueventd
 PRODUCT_PACKAGES += \
@@ -294,20 +283,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service
-
+    
+# For GNSS
 PRODUCT_PACKAGES += \
-    android.frameworks.sensorservice@1.0.vendor \
-    vendor.huawei.hardware.sensors@1.0.vendor
+    android.frameworks.sensorservice@1.0.vendor
 
 # Task profiles
 PRODUCT_COPY_FILES += \
     system/core/libprocessgroup/profiles/cgroups_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
     system/core/libprocessgroup/profiles/task_profiles_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
-# Tee
-PRODUCT_PACKAGES += \
-    vendor.huawei.hardware.libteec@2.0 \
-    vendor.huawei.hardware.libteec@2.0.vendor
 
 # Trust HAL
 PRODUCT_PACKAGES += \
@@ -317,9 +302,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service
-
-PRODUCT_PACKAGES += \
-    vendor.huawei.hardware.hwvibrator@1.0.vendor
 
 # VNDK
 PRODUCT_PACKAGES += \

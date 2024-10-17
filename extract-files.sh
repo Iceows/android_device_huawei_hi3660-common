@@ -73,7 +73,7 @@ function blob_fixup() {
             sed -i '1i on property:sys.rilprops_ready=1\n    start vendor.ril-daemon\n' "${2}"
             echo "    disabled" >> "${2}"
             ;;
-        vendor/lib64/hw/audio.primary_hisi.hi3660.so)
+        vendor/lib64/hw/audio.primary.hi3660.so)
             "${PATCHELF}" --add-needed "libprocessgroup.so" "${2}"
             ;;
         vendor/lib*/hw/gralloc.hi3660.so)
@@ -88,8 +88,8 @@ function blob_fixup() {
         vendor/lib64/libcamera_algo.so)
             "${PATCHELF}" --add-needed "libui_shim.so" "${2}"
             ;;
-        vendor/lib*/libril-hisi.so)
-            "${PATCHELF}" --set-soname "libril-hisi.so" "${2}"
+        vendor/lib64/libtpp.so)
+            "${SIGSCAN}" -p "e3 03 13 aa d7 f2 ff 97" -P "e3 03 13 aa 1f 20 03 d5" -f "${2}"
             ;;
         vendor/lib/libwvhidl.so)
             "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite.so" "libprotobuf-cpp-lite-v29.so" "${2}"
@@ -99,17 +99,17 @@ function blob_fixup() {
 
 if [ -z "${ONLY_TARGET}" ]; then
     # Initialize the helper for common device
-    setup_vendor "${DEVICE_COMMON}" "${VENDOR_COMMON:-$VENDOR}" "${ANDROID_ROOT}" true "${CLEAN_VENDOR}"
+    setup_vendor "${DEVICE_COMMON}" "${VENDOR}" "${ANDROID_ROOT}" true "${CLEAN_VENDOR}"
 
     extract "${MY_DIR}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 fi
 
-if [ -z "${ONLY_COMMON}" ] && [ -s "${MY_DIR}/../../${VENDOR}/${DEVICE}/proprietary-files.txt" ]; then
+if [ -z "${ONLY_COMMON}" ] && [ -s "${MY_DIR}/../${DEVICE}/proprietary-files.txt" ]; then
     # Reinitialize the helper for device
-    source "${MY_DIR}/../../${VENDOR}/${DEVICE}/extract-files.sh"
+    source "${MY_DIR}/../${DEVICE}/extract-files.sh"
     setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false "${CLEAN_VENDOR}"
 
-    extract "${MY_DIR}/../../${VENDOR}/${DEVICE}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
+    extract "${MY_DIR}/../${DEVICE}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 fi
 
 "${MY_DIR}/setup-makefiles.sh"

@@ -1,2 +1,3 @@
 on init
     setprop sys.usb.configfs 1
+    symlink /dev/block/by-name/kernel /dev/block/by-name/ramdisk
