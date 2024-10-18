@@ -28,8 +28,10 @@ vendor/lib64/libbt-vendor-hisi.so
 vendor/lib64/libbt-vendor.so:vendor/lib64/libbt-vendor-bcm.so
 
 # Camera
+vendor/lib64/hw/CameraFactoryService.so
 vendor/lib64/hw/hicam.hal.bz.so
 vendor/lib64/hw/hicam.hal.service.so
+vendor/lib64/hw/vendor.huawei.hardware.camera.factory@1.0-impl.so
 vendor/lib64/hwcam/hwcam.ddt.so
 vendor/lib64/hwcam/hwcam.services.so
 vendor/lib64/libBestShot.so
