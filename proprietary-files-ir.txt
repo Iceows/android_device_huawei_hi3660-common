@@ -1,0 +1,9 @@
+# All unpinned blobs below are extracted from STF-L09-user 9.1.0 HUAWEISTF-L09 231-OVS-LGRP2 release-keys
+# Consumer Ir
+vendor/etc/ir_config
+vendor/lib64/hw/consumerir.hi3660.so
+vendor/lib64/libhi64xxIrAccess.so
+vendor/lib64/libhisi-set_regs.so
+vendor/lib64/libhisiIrAccess.so
+vendor/lib64/libir_driver_init.so
+vendor/lib64/libmaximIrAccess.so

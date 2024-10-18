@@ -303,6 +303,14 @@ PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service
 
+# Consumer Ir
+ifeq ($(BOARD_HAVE_IR),true)
+PRODUCT_PACKAGES += \
+    android.hardware.ir-service.huawei
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
+endif
+
 # VNDK
 PRODUCT_PACKAGES += \
     libui-v28 \

@@ -30,6 +30,10 @@ write_headers "stanford victoria"
 # The standard common blobs
 write_makefiles "${MY_DIR}/proprietary-files.txt" true
 
+printf "\n%s\n" "ifeq (\$(BOARD_HAVE_IR),true)" >> "${PRODUCTMK}"
+write_makefiles "${MY_DIR}/proprietary-files-ir.txt" true
+echo "endif" >> "${PRODUCTMK}"
+
 # Finish
 write_footers
 
