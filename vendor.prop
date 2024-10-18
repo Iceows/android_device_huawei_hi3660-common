@@ -32,6 +32,7 @@ persist.bluetooth.a2dp_offload.disabled=false
 persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd
 ro.bt.bdaddr_path=/data/vendor/bluedroid/macbt
 bluetooth.le.disable_apcf_extended_features=1
+bluetooth.core.gap.le.privacy.enabled=false
 
 
 # Camera
