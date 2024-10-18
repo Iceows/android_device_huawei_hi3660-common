@@ -25,10 +25,11 @@ bluetooth.profile.pbap.server.enabled?=true
 bluetooth.profile.sap.server.enabled?=true
 
 # Bluetooth
-persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac-ldac
+bluetooth.device.default_name=Huawei hi3660
+persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
 ro.bluetooth.a2dp_offload.supported=true
 persist.bluetooth.a2dp_offload.disabled=false
-persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac
+persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd
 ro.bt.bdaddr_path=/data/vendor/bluedroid/macbt
 
 # Camera
