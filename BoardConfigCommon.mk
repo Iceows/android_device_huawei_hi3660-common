@@ -167,6 +167,9 @@ VENDOR_SECURITY_PATCH := 2021-05-01
 include device/hisi/sepolicy/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
 
+# SurfaceFlinger
+TARGET_DISABLE_TRIPLE_BUFFERING := true
+
 # Treble
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_USE_VNDK_OVERRIDE := true
