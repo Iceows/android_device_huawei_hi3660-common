@@ -311,6 +311,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
 endif
 
+# Folio
+PRODUCT_PACKAGES += \
+    folio_daemon
+
 # VNDK
 PRODUCT_PACKAGES += \
     libui-v28 \
