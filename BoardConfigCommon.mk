@@ -9,6 +9,13 @@ COMMON_PATH := device/huawei/hi3660-common
 # Broken
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
+# error: overriding commands for target 
+# Fix charger animation conflit
+BUILD_BROKEN_DUP_RULES := true
+
+# Charger
+BACKLIGHT_PATH := /sys/class/leds/lcd_backlight0/brightness
+
 # APEX
 OVERRIDE_TARGET_FLATTEN_APEX := true
 

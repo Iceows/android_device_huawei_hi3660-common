@@ -277,124 +277,12 @@ service preparesdservice /system/bin/vdc volume storagetosd
    disabled
    oneshot
 
-## Service definition
-service hiscoutmanager /system/vendor/bin/hiscoutmanager
-    class late_start
-    user root
-    group system
-    oneshot
-    seclabel u:r:hiscoutmanager:s0
-	
-## Service definition
-service logserver /system/bin/logserver
-    class late_start
-    user root
-    group system
-    oneshot
-    seclabel u:r:logserver:s0
-
-## Service definition
-service imonitor /system/bin/imonitor
-    class late_start
-    user root
-    group system log
-    seclabel u:r:logserver:s0
-    writepid /dev/cpuset/system-background/tasks /dev/cpuctl/bg_non_interactive/tasks /dev/stune/system-background/tasks /dev/blkio/system-background/tasks
-
-
-service imonitorv /system/vendor/bin/imonitor
-    class late_start
-    user root
-    group system log
-    seclabel u:r:logserver:s0
-    writepid /dev/cpuset/system-background/tasks /dev/cpuctl/bg_non_interactive/tasks /dev/stune/system-background/tasks /dev/blkio/system-background/tasks
-
 # Record boot complete metrics for modemlogcat
 on property:sys.boot_completed=0
     setprop vendor.boot_completed 0
 on property:sys.boot_completed=1
     setprop vendor.boot_completed 1
 
-# Service for mdoemchr - moved to /vendor/hisi/ap/system/core/modemchr/
-
-service dumptool /system/bin/dumptool
-    class late_start
-    seclabel u:r:logserver:s0
-
-service hw_cdma_service /system/bin/hw_cdmamodem_service /dev/acm_cdma_log /dev/ttySPI3 /dev/ttySPI1
-    class main
-    user root
-    disabled
-
-service ddrtest /system/bin/do_ddrtest
-    user root
-    disabled
-    oneshot
-
-service stop_ddrtest /system/bin/do_ddrtest
-    user root
-    disabled
-    oneshot
-
-#limit current through thermal-daemon --limit_current(-l)
-service limit_current /system/bin/limit_current -l
-    user system
-    group system
-    disabled
-
-service hwpged /system/bin/hwpged
-    class main
-    socket iawared seqpacket 0660 system system
-    user root
-    group system readproc
-    writepid /dev/cpuset/foreground/tasks
-
-service mobicache /system/bin/mobicache
-    class main
-    user root
-    group readproc
-
-service powerlogd /system/bin/powerlogd
-    class core
-    socket powerlogd stream 0600 system system
-    socket powerlogdr seqpacket 0600 system system
-    socket powerlogdw dgram 0220 system system
-    writepid /dev/cpuset/system-background/tasks /dev/cpuctl/bg_non_interactive/tasks /dev/stune/system-background/tasks /dev/blkio/system-background/tasks
 
 
-# charge-monitor
-service chargemonitor /system/bin/chargemonitor
-    class late_start
-    user system
-    group system shell
-    oneshot
-    seclabel u:r:chargemonitor:s0
-    writepid /dev/cpuset/system-background/tasks /dev/cpuctl/bg_non_interactive/tasks /dev/stune/system-background/tasks /dev/blkio/system-background/tasks
 
-
-#on property:debug.rt.ddr.test=1
-#    stop ddrtest
-#    start ddrtest
-#on property:debug.rt.ddr.test=2
-#    start ddrtest
-#on property:debug.rt.ddr.test=3
-#    start ddrtest
-#on property:debug.rt.ddr.test=4
-#    start stop_ddrtest
-
-service mapper /system/bin/sh /vendor/bin/mappersh
-    class late_start
-    user root
-    group system
-    disabled
-    seclabel u:r:mapper:s0
-
-service bastetd /system/bin/bastetd
-    class main
-    user root
-    group system root
-
-service storage_info /vendor/bin/storage_info
-    class late_start
-    user root
-    group system wakelock

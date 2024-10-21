@@ -159,40 +159,6 @@ on data_ready
 on data_not_ready
     write /proc/data-ready 0
 
-## Property trigger
-#on property:ro.sample=*
-#    write /device/sample/sample_property ${ro.some_property}
-#    chmod 644 /device/sample/sample_device
-
-
-## Service definition
-#service sample /system/bin/sample
-#    class main
-#    user root
-#    group system log graphics
-#    socket sample stream 0660 system system
-#    disabled
-#    oneshot
-#    onrestart restart another_service
-#service ril-daemon /vendor/bin/hw/rild
-#    disabled
-#    class core
-
-#    user root
-#    group radio cache inet misc audio sdcard_r sdcard_rw log readproc system
-
-#service ril-daemon1 /vendor/bin/hw/rild -c 1
-#    disabled
-#    class core
-
-#    user root
-#    group radio cache inet misc audio sdcard_r sdcard_rw log
-
-#on property:init.svc.zygote=running
-#    start ril-daemon
-
-#on property:odm.rild.rild1_ready_to_start=true
-#    start ril-daemon1
 
 #add for create /data/vendor/hwcdump and add context
 on property:ro.build.type=eng
@@ -202,12 +168,4 @@ on property:ro.build.type=eng
 on property:ro.build.type=eng
     write /proc/sys/kernel/kptr_restrict 0
 
-service gcovd /vendor/bin/gcovd
-    disabled
-    class core
-    user root
-    group root
-    oneshot
 
-on property:ro.vendor.build.gcov=y
-    start gcovd

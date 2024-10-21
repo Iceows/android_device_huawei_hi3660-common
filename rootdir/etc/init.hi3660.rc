@@ -847,13 +847,6 @@ on property:sys.shlogd=0
 on property:sys.shlogd=1
     start shlogd
 
-#service kmsgcat_cp /sbin/kmsgcat -r 4096 -n 25 -i /dev/cshell_log -f /data/log/cp_log/modemlog/modemkmsg-log
-#    class late_start
-#    user root
-#    group system
-#    disabled
-#    seclabel u:r:hisilogcat:s0
-
 on data_ready
     exec u:r:blkcginit:s0 root root -- /vendor/bin/sh /vendor/etc/blkcg_init.sh 0 0
 
@@ -863,11 +856,6 @@ service datarply /vendor/bin/data_replay
     disabled
     oneshot
 
-# start datarply manually before selinux issue fixed
-#on property:ro.debuggable=1
-#    chmod 0660 /dev/playback
-#    chown system system /dev/playback
-#    start datarply
 
 on property:service.bootanim.exit=1
     write /proc/balong/stats/boot_time 1
@@ -877,17 +865,20 @@ on property:ro.runmode=normal
     write /sys/class/hw_power/charger/direct_charger/iin_thermal 1500
     write /sys/class/hw_power/charger/direct_charger_sc/iin_thermal 1500
 
+on charger
 
-service unrmd /system/vendor/bin/unrmd
-    class late_start
+    setprop sys.usb.configfs 0
+    setprop persist.sys.usb.config mass_storage
+    
+    class_start charger
+
+
+service charger /system/bin/charger
+    class charger
     user root
-    group system
-    oneshot
-
-service gpuassistant /system/bin/gpuassistant
-    class core
-    user system
-    group system
+    group root system
+    critical
+    seclabel u:r:charger:s0
 
 service oeminfo_nvm /vendor/bin/oeminfo_nvm_server
     class core

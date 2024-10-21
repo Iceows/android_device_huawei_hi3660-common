@@ -169,25 +169,5 @@ on boot
     chown system system /sys/class/led_alwayson/led_alwayson/version_mode
 #led config
     chown system system /sys/class/led_config/led_config/led_config_status
-## Property trigger
-#on property:ro.sample=*
-#    write /device/sample/sample_property ${ro.some_property}
-#    chmod 644 /device/sample/sample_device
 
 
-
-## Service definition
-#service sample /system/bin/sample
-#    class main
-#    user root
-#    group system log graphics
-#    socket sample stream 0660 system system
-#    disabled
-#    oneshot
-#    onrestart restart another_service
-
-service hwemerffu /vendor/bin/hwemerffu
-    class main
-    user root
-    group root system
-    oneshot
