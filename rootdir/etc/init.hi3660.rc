@@ -344,14 +344,9 @@ on property:sys.boot_completed=1
     write /sys/kernel/eas/boot_boost 0
 
 on fs
-
     # sec_storage for TEE
     chown root root /sec_storage
     chmod 600 /sec_storage
-    mkdir /data/sec_storage_data 0700 system system encryption=None
-    restorecon /data/sec_storage_data
-    mkdir /data/sec_storage_data_users 0700 system system encryption=None
-    restorecon /data/sec_storage_data_users
 
     # splash2
     restorecon /splash2
@@ -372,7 +367,7 @@ on fs
     # Enable ZRAM
     swapon_all /vendor/etc/fstab.${ro.hardware}
 
-	    # Start TEECD
+    # Start TEECD
     start teecd
     
 on early-boot
@@ -388,10 +383,25 @@ on post-fs
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
-# set sec_storage_data can be access by teecd
+
 on post-fs-data
 
     # TEE
+    mkdir /data/sec_storage_data 0700 system system encryption=None
+    restorecon /data/sec_storage_data
+    
+    mkdir /data/sec_storage_data_users 0700 system system encryption=None
+    restorecon /data/sec_storage_data_users
+    
+    mkdir /data/vendor/log/sec_storage_data 0775 system system
+    mkdir /data/vendor/log/sec_storage_data/log 0755 system system
+
+    mkdir /data/vendor/sec_storage_data 0700 system system
+    restorecon /data/vendor/sec_storage_data
+
+    mkdir /data/vendor/sec_storage_data_users 0700 system system
+    restorecon /data/vendor/sec_storage_data_users
+    
     mkdir /data/vendor/log/sec_storage_data 0775 system system
     mkdir /data/vendor/log/sec_storage_data/log 0755 system system
 
@@ -410,11 +420,7 @@ on post-fs-data
     # Vold
     setprop vold.post_fs_data_done 1
 
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+
 
 on init
 #add for TrustedCore driver
