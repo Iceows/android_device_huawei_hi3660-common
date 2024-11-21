@@ -14,7 +14,6 @@ import /vendor/etc/init/hw/init.device.rc
 import /vendor/etc/init/hw/init.hisi.rc
 import /vendor/etc/init/hw/init.hisi.usb.rc
 import /vendor/etc/init/hw/init.platform.rc
-import /vendor/etc/init/hw/init.tee.rc
 import /vendor/etc/init/hw/init.vowifi.rc
 
 on early-init
@@ -41,6 +40,13 @@ on early-fs
     start oeminfo_nvm
 
 on init
+
+    # TEE
+    chmod 0400 /dev/hisi_teelog
+    mount ext4 /dev/block/bootdevice/by-name/secure_storage /sec_storage nosuid nodev noatime wait crypt discard,auto_da_alloc,mblk_io_submit,data=journal,context=u:object_r:teecd_data_file:s0
+    chown root root /sec_storage
+    chmod 600 /sec_storage
+    
     chown system system /sys/class/hisi_thermal/spm/spm_mode
     chmod 644 /sys/class/hisi_thermal/spm/spm_mode
 
@@ -422,32 +428,6 @@ on post-fs-data
 
 
 
-on init
-#add for TrustedCore driver
-    chmod 0400 /dev/hisi_teelog
-
-#secure os tee agent
-service teeauth /system/bin/tee_auth_daemon
-    socket tui_daemon stream 660 root system
-    socket tee-multi-user stream 660 root system
-    class core
-    user root
-    group root system readproc
-    seclabel u:r:system_teecd:s0
-
-service teecd /vendor/bin/teecd
-    class early_hal
-    user root
-    group root system readproc
-    seclabel u:r:tee:s0
-
-service teelogcat /vendor/bin/tlogcat -f
-    class late_start
-    user root
-    group system
-    disabled
-    seclabel u:r:tlogcat:s0
-
 on boot
     # Oeminfo
     chmod 0666 /dev/socket/oeminfo_nvm
@@ -775,12 +755,6 @@ on boot
 on property:sys.boot_completed=1
     write /sys/kernel/rcc/event BOOT_COMPLETE
 
-service vendor.folio_daemon /system/bin/folio_daemon
-    class late_start
-    user system
-    group system uhid
-    disabled
-
 on property:init.svc.zygote=running
     start vendor.folio_daemon
 
@@ -835,18 +809,7 @@ on post-fs-data
     chown media camera /data/vendor/camera/img
     chmod 770 /data/vendor/camera/img
 
-service shlogd /system/bin/shs
-    class late_start
-    user root
-    group system
-    disabled
-    writepid /dev/cpuset/background/tasks /dev/stune/background/tasks /dev/blkio/background/tasks
 
-service shex /system/bin/shex -p
-    user root
-    group system
-    disabled
-    oneshot
 
 on property:sys.shlogd=0
     stop shlogd
@@ -855,12 +818,6 @@ on property:sys.shlogd=1
 
 on data_ready
     exec u:r:blkcginit:s0 root root -- /vendor/bin/sh /vendor/etc/blkcg_init.sh 0 0
-
-service datarply /vendor/bin/data_replay
-    user system
-    group system
-    disabled
-    oneshot
 
 
 on property:service.bootanim.exit=1
@@ -878,6 +835,61 @@ on charger
     
     class_start charger
 
+
+#**********************************************************************************
+#
+# Section for service definition
+#
+#**********************************************************************************
+
+
+service vendor.folio_daemon /system/bin/folio_daemon
+    class late_start
+    user system
+    group system uhid
+    disabled
+
+service shlogd /system/bin/shs
+    class late_start
+    user root
+    group system
+    disabled
+    writepid /dev/cpuset/background/tasks /dev/stune/background/tasks /dev/blkio/background/tasks
+
+service shex /system/bin/shex -p
+    user root
+    group system
+    disabled
+    oneshot
+
+service datarply /vendor/bin/data_replay
+    user system
+    group system
+    disabled
+    oneshot
+
+#secure os tee agent
+service teeauth /system/bin/tee_auth_daemon
+    socket tui_daemon stream 660 root system
+    socket tee-multi-user stream 660 root system
+    class core
+    user root
+    group root system readproc
+    seclabel u:r:teecd_auth:s0
+
+service teecd /vendor/bin/teecd
+    class early_hal
+    user root
+    group root system readproc
+    disabled
+    seclabel u:r:tee:s0
+
+# un-comment to debug tee
+# service teelogcat /vendor/bin/tlogcat -f
+#    class late_start
+#    user root
+#   group system
+#    seclabel u:r:teelogcat:s0
 
 service charger /system/bin/charger
     class charger
